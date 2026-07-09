@@ -993,6 +993,27 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape') cc();
 });
 
+// ── SW Auto-update ──
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').then(function(reg){
+    reg.addEventListener('updatefound', function(){
+      var w = reg.installing;
+      w.addEventListener('statechange', function(){
+        if(w.state==='installed' && navigator.serviceWorker.controller){
+          w.postMessage({action:'skipWaiting'});
+          toast('🔄 Nueva versión — actualizando...');
+          setTimeout(function(){ window.location.reload(); }, 1500);
+        }
+      });
+    });
+  });
+  var refr;
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    clearTimeout(refr);
+    refr = setTimeout(function(){ window.location.reload(); }, 500);
+  });
+}
+
 // ── Overlays ──
 function openOv(id){ document.getElementById(id).classList.add('on'); }
 function closeOv(id){ document.getElementById(id).classList.remove('on'); }
