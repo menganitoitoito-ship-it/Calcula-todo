@@ -152,6 +152,15 @@ textarea.fi{min-height:60px;resize:none;line-height:1.5}
 .cats{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
 .cat{width:36px;height:36px;border-radius:9px;background:var(--s3);border:1.5px solid #2a2c30;cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .cat.on{border-color:var(--blue);background:rgba(77,156,255,.1)}
+.hist-btn{background:var(--s2);border:1px solid #2a2c30;border-radius:9px;width:34px;height:34px;color:var(--t3);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;margin-top:2px}
+.hist-btn:hover{border-color:var(--blue);color:var(--blue)}
+.hist-list{display:flex;flex-direction:column;gap:6px}
+.hist-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--s3);border-radius:10px;cursor:pointer;transition:background .15s}
+.hist-item:active{background:#2d3036}
+.hist-item-expr{font-size:12px;color:var(--t3);font-family:monospace}
+.hist-item-res{font-size:16px;font-weight:700;color:var(--t1);font-family:monospace}
+.hist-empty{padding:30px;text-align:center;color:var(--t3);font-size:13px}
+.hist-clear{text-align:center;margin-top:12px}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(14px);background:#333;border-radius:20px;padding:8px 16px;font-size:12px;font-weight:600;z-index:200;opacity:0;transition:all .25s;white-space:nowrap;pointer-events:none}
 .toast.on{opacity:1;transform:translateX(-50%)}
 </style>
@@ -176,8 +185,13 @@ textarea.fi{min-height:60px;resize:none;line-height:1.5}
 <!-- CALCULADORA -->
 <div class="view on" id="view-calc">
   <div class="calc-screen">
-    <div class="calc-expr" id="cExpr"></div>
-    <div class="calc-num" id="cNum">0</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div style="flex:1;min-width:0">
+        <div class="calc-expr" id="cExpr"></div>
+        <div class="calc-num" id="cNum">0</div>
+      </div>
+      <button class="hist-btn" onclick="toggleHist()" id="histBtn" title="Historial">⏱</button>
+    </div>
   </div>
   <div class="calc-tabs">
     <div class="ct on" id="ct-std" onclick="setMode('std')">Estándar</div>
@@ -343,6 +357,19 @@ textarea.fi{min-height:60px;resize:none;line-height:1.5}
   </div>
 </div>
 
+<!-- Modal: Historial -->
+<div class="ov" id="ovHist">
+  <div class="sheet">
+    <div class="sh"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div class="st" style="margin-bottom:0">Historial</div>
+      <span id="histCount" style="font-size:11px;color:var(--t3);font-family:monospace"></span>
+    </div>
+    <div id="histList" class="hist-list"></div>
+    <div class="hist-clear"><button class="btn btn-r" onclick="clearHist()">🗑 Borrar historial</button></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -438,6 +465,35 @@ function addHistory(expr,result){
   cHistory.unshift({expr:expr,result:result,ts:Date.now()});
   if(cHistory.length>20) cHistory=cHistory.slice(0,20);
   sv('kalk_history',cHistory);
+}
+
+function toggleHist(){
+  renderHist();
+  document.getElementById('ovHist').classList.toggle('on');
+}
+function renderHist(){
+  var el=document.getElementById('histList');
+  document.getElementById('histCount').textContent=cHistory.length+' ops';
+  if(!cHistory.length){
+    el.innerHTML='<div class="hist-empty">Aún no hay operaciones</div>';
+    return;
+  }
+  el.innerHTML=cHistory.map(function(h,i){
+    return '<div class="hist-item" onclick="loadHist('+i+')">'+
+      '<div><div class="hist-item-expr">'+esc(h.expr)+'</div></div>'+
+      '<div class="hist-item-res">'+esc(fmtNum(h.result))+'</div></div>';
+  }).join('');
+}
+function loadHist(i){
+  var h=cHistory[i];
+  if(h){ cResult=String(h.result); cExpr=''; cJustEq=true; updDisp(); }
+  document.getElementById('ovHist').classList.remove('on');
+}
+function clearHist(){
+  if(!confirm('¿Borrar todo el historial?')) return;
+  cHistory=[]; cHistIdx=-1;
+  sv('kalk_history',cHistory);
+  renderHist(); toast('Historial borrado');
 }
 
 function histUp(){
