@@ -18,19 +18,12 @@
   --blue:#4d9cff;--green:#34c97a;--red:#ff5f57;--amber:#ffb340;
 }
 html,body{height:100%;background:var(--bg);color:var(--t1);font-family:-apple-system,sans-serif;overflow:hidden}
-
 .app{height:100vh;display:flex;flex-direction:column;max-width:480px;margin:0 auto}
-
-/* NAV */
 .nav{display:flex;background:var(--s1);border-bottom:1px solid #2a2c30;flex-shrink:0}
 .nt{flex:1;padding:12px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border-bottom:2px solid transparent;color:var(--t3);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;transition:all .15s}
 .nt.on{color:var(--blue);border-bottom-color:var(--blue)}
-
-/* VIEWS */
 .view{display:none;flex:1;overflow:hidden;flex-direction:column}
 .view.on{display:flex}
-
-/* ── CALCULADORA ── */
 .calc-screen{padding:12px 16px 6px;flex-shrink:0}
 .calc-expr{height:20px;font-size:13px;color:var(--t3);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:monospace}
 .calc-num{font-size:52px;font-weight:300;text-align:right;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.1;font-family:monospace}
@@ -49,7 +42,9 @@ html,body{height:100%;background:var(--bg);color:var(--t1);font-family:-apple-sy
 .b.del{background:var(--s2);color:var(--red)}
 .b.w2{grid-column:span 2}
 .b.sci{background:var(--s1);color:#bf7fff;font-size:13px;border:1px solid #2a2c30}
-/* pct mode */
+.calc-conv-link{display:flex;gap:5px;padding:0 12px 6px;flex-shrink:0}
+.calc-conv-link .ccv{padding:4px 10px;border-radius:16px;background:var(--s2);border:1px solid #2a2c30;color:var(--t3);font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s}
+.calc-conv-link .ccv:hover{border-color:var(--blue);color:var(--blue)}
 .pct-wrap{padding:10px 14px;flex:1;overflow-y:auto}
 .pct-card{background:var(--s2);border-radius:14px;padding:14px;margin-bottom:10px}
 .pct-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
@@ -58,8 +53,6 @@ html,body{height:100%;background:var(--bg);color:var(--t1);font-family:-apple-sy
 .pct-inp:focus{border-color:var(--blue)}
 .pct-lbl{font-size:12px;color:var(--t3);white-space:nowrap}
 .pct-res{font-family:monospace;font-size:14px;color:var(--green);margin-top:6px;line-height:1.8}
-
-/* ── CONVERSOR ── */
 .conv-scroll{flex:1;overflow-y:auto;padding:12px}
 .conv-cats{display:flex;gap:5px;overflow-x:auto;padding-bottom:10px}
 .conv-cats::-webkit-scrollbar{display:none}
@@ -79,16 +72,12 @@ html,body{height:100%;background:var(--bg);color:var(--t1);font-family:-apple-sy
 .cr-val{font-family:monospace;font-size:15px;font-weight:600}
 .cr-val.hl{color:var(--green)}
 .rate-note{font-size:10px;color:var(--t3);font-family:monospace;text-align:right;margin-top:6px;padding:0 2px}
-
-/* clothing table */
 .cloth-section{margin-bottom:14px}
 .cloth-lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
 .cloth-table{width:100%;border-collapse:collapse;font-family:monospace;font-size:12px}
 .cloth-table th{padding:6px 8px;background:var(--s3);color:var(--t2);font-weight:700;text-align:center}
 .cloth-table td{padding:6px 8px;text-align:center}
 .cloth-table tr:nth-child(even) td{background:var(--s3)}
-
-/* ── GASTOS ── */
 .gastos-scroll{flex:1;overflow-y:auto;padding:12px}
 .group-card{background:var(--s2);border-radius:14px;margin-bottom:10px;overflow:hidden;cursor:pointer;transition:opacity .15s}
 .group-card:active{opacity:.8}
@@ -103,8 +92,6 @@ html,body{height:100%;background:var(--bg);color:var(--t1);font-family:-apple-sy
 .gc-bal.owe{color:var(--red)}.gc-bal.get{color:var(--green)}.gc-bal.ok{color:var(--t3)}
 .new-grp-btn{width:100%;padding:15px;background:var(--s2);border:2px dashed #2a2c30;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--t3);font-size:14px;font-weight:600;transition:all .15s}
 .new-grp-btn:active{border-color:var(--blue);color:var(--blue)}
-
-/* group detail */
 .gd{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);max-width:480px;margin:0 auto}
 .gd.on{transform:none}
 .gd-head{display:flex;align-items:center;gap:10px;padding:13px 14px;border-bottom:1px solid #2a2c30;flex-shrink:0;background:var(--s1)}
@@ -134,11 +121,12 @@ html,body{height:100%;background:var(--bg);color:var(--t1);font-family:-apple-sy
 .ei-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
 .ei-amt{font-family:monospace;font-size:15px;font-weight:600}
 .ei-del{background:none;border:none;color:var(--t3);cursor:pointer;font-size:13px;padding:2px 4px}
+.ei-edit{background:none;border:none;color:var(--t2);cursor:pointer;font-size:13px;padding:2px 4px}
 .add-exp-btn{position:sticky;bottom:0;padding:12px;background:linear-gradient(to top,var(--bg) 50%,transparent);flex-shrink:0}
 .aeb{width:100%;padding:14px;background:var(--blue);border:none;border-radius:13px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .15s}
 .aeb:active{opacity:.8}
-
-/* MODALS */
+.export-bar{width:100%;padding:12px;background:var(--s2);border:1px solid #2a2c30;border-radius:13px;color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px}
+.export-bar:active{opacity:.7}
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .2s}
 .ov.on{opacity:1;pointer-events:all}
 .sheet{background:var(--s1);border-radius:22px 22px 0 0;padding:18px;width:100%;transform:translateY(100%);transition:transform .26s cubic-bezier(.4,0,.2,1);max-height:88vh;overflow-y:auto}
@@ -196,6 +184,7 @@ textarea.fi{min-height:60px;resize:none;line-height:1.5}
     <div class="ct" id="ct-sci" onclick="setMode('sci')">Científica</div>
     <div class="ct" id="ct-pct" onclick="setMode('pct')">Porcentajes</div>
   </div>
+  <div class="calc-conv-link" id="calcConvLinks"></div>
   <div class="grid" id="stdGrid">
     <div class="b fn" onclick="cc()">C</div>
     <div class="b fn" onclick="pm()">±</div>
@@ -335,6 +324,25 @@ textarea.fi{min-height:60px;resize:none;line-height:1.5}
   </div>
 </div>
 
+<!-- Modal: Editar gasto -->
+<div class="ov" id="ovEditExp">
+  <div class="sheet">
+    <div class="sh"></div>
+    <div class="st">Editar gasto</div>
+    <div class="fr">
+      <div class="fg"><label>Descripción</label><input class="fi" id="eeDesc" placeholder="Cena, taxi..."></div>
+      <div class="fg" style="max-width:110px"><label>Importe</label><input class="fi" id="eeAmt" type="number" step="0.01" placeholder="0.00" style="font-family:monospace"></div>
+    </div>
+    <div class="fg"><label>Icono</label><div class="cats" id="eeCats"></div></div>
+    <div class="fg"><label>¿Quién pagó?</label><div class="pills" id="eePayer"></div></div>
+    <div class="fg"><label>¿Entre quiénes? (todos = a partes iguales)</label><div class="pills" id="eeSplit"></div></div>
+    <div class="fa">
+      <button class="btn btn-g" onclick="closeOv('ovEditExp')">Cancelar</button>
+      <button class="btn btn-b" onclick="saveEditExp()">Guardar</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -360,12 +368,16 @@ function goTab(tab){
   document.querySelectorAll('.nt').forEach(function(n){ n.classList.remove('on'); });
   document.getElementById('view-'+tab).classList.add('on');
   document.getElementById('nt-'+tab).classList.add('on');
-  if(tab==='conv'){ convInit(); }
-  if(tab==='gastos'){ renderGastos(); }
+  if(tab==='conv') convInit();
+  if(tab==='gastos') renderGastos();
+  if(tab==='calc') renderCalcConvLinks();
 }
 
 // ─── CALCULADORA ───
 var cExpr='', cResult='0', cMode='std';
+var cJustEq=false;
+var cHistory=ld('kalk_history',[]);
+var cHistIdx=-1;
 
 function setMode(m){
   cMode=m;
@@ -389,35 +401,75 @@ function fmtNum(s){
   return n.toLocaleString('es-ES',{maximumFractionDigits:8});
 }
 function num(n){
+  if(cJustEq){ cExpr=''; cJustEq=false; }
+  cHistIdx=-1;
   if(n==='π') cExpr+=String(Math.PI);
   else cExpr+=n;
   cResult=cExpr; updDisp();
 }
-function op(o){ cExpr+=o; cResult=cExpr; updDisp(); }
-function dot(){ var p=cExpr.split(/[\+\−\×\÷]/); if(p[p.length-1].indexOf('.')<0) cExpr+='.'; cResult=cExpr; updDisp(); }
-function cc(){ cExpr=''; cResult='0'; updDisp(); }
-function del(){ cExpr=cExpr.slice(0,-1); cResult=cExpr||'0'; updDisp(); }
+function op(o){
+  if(cJustEq){ cExpr=cResult+o; cJustEq=false; }
+  else cExpr+=o;
+  cHistIdx=-1;
+  cResult=cExpr; updDisp();
+}
+function dot(){
+  if(cJustEq){ cExpr='0.'; cJustEq=false; }
+  else{ var p=cExpr.split(/[\+\−\×\÷]/); if(p[p.length-1].indexOf('.')<0) cExpr+='.'; }
+  cHistIdx=-1; cResult=cExpr; updDisp();
+}
+function cc(){ cExpr=''; cResult='0'; cJustEq=false; cHistIdx=-1; updDisp(); }
+function del(){ cExpr=cExpr.slice(0,-1); cResult=cExpr||'0'; cJustEq=false; cHistIdx=-1; updDisp(); }
 function pm(){
+  if(cJustEq){ cExpr='-'+cResult; cResult=cExpr; cJustEq=false; cHistIdx=-1; updDisp(); return; }
   var n=parseFloat(cResult);
-  if(!isNaN(n)){ cExpr=String(-n); cResult=cExpr; updDisp(); }
+  if(!isNaN(n)){ cExpr=String(-n); cResult=cExpr; cHistIdx=-1; updDisp(); }
 }
 function evalSafe(expr){
   try{
     var e=expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/\^/g,'**').replace(/%/g,'/100');
-    // Only allow safe characters
     if(!/^[\d\s\+\-\*\/\.\(\)\^e]+$/.test(e.replace(/\*\*/g,'**'))) return null;
     var r=eval(e);
     return isFinite(r)?r2(r):null;
   }catch(ex){ return null; }
 }
+
+function addHistory(expr,result){
+  cHistory.unshift({expr:expr,result:result,ts:Date.now()});
+  if(cHistory.length>20) cHistory=cHistory.slice(0,20);
+  sv('kalk_history',cHistory);
+}
+
+function histUp(){
+  if(!cHistory.length) return;
+  cHistIdx++;
+  if(cHistIdx>=cHistory.length) cHistIdx=0;
+  cResult=String(cHistory[cHistIdx].result);
+  cExpr=''; cJustEq=true;
+  updDisp();
+  toast(cHistory[cHistIdx].expr+' = '+cResult);
+}
+function histDown(){
+  if(!cHistory.length) return;
+  cHistIdx--;
+  if(cHistIdx<0) cHistIdx=cHistory.length-1;
+  cResult=String(cHistory[cHistIdx].result);
+  cExpr=''; cJustEq=true;
+  updDisp();
+  toast(cHistory[cHistIdx].expr+' = '+cResult);
+}
+
 function eq(){
   if(!cExpr) return;
   var r=evalSafe(cExpr);
   if(r===null){ cResult='Error'; updDisp(); return; }
-  cResult=String(r); cExpr=''; updDisp();
+  var oldExpr=cExpr;
+  cResult=String(r); cExpr=''; cJustEq=true; updDisp();
+  addHistory(oldExpr+' = ',cResult);
 }
+
 function sci(fn){
-  var v=parseFloat(cResult)||0; var r;
+  var v=parseFloat(cResult)||0; var r; var label=fn+'('+cResult+')';
   if(fn==='sin') r=Math.sin(v*Math.PI/180);
   else if(fn==='cos') r=Math.cos(v*Math.PI/180);
   else if(fn==='tan') r=Math.tan(v*Math.PI/180);
@@ -429,7 +481,8 @@ function sci(fn){
   else if(fn==='abs') r=Math.abs(v);
   else if(fn==='fact'){ r=1; for(var i=2;i<=Math.round(v);i++) r*=i; }
   if(r===undefined||!isFinite(r)) r=0;
-  cExpr=''; cResult=String(r2(r)); updDisp();
+  cJustEq=true; cExpr=''; cResult=String(r2(r)); updDisp();
+  addHistory(label,String(r2(r)));
 }
 function calcPct(){
   var b=parseFloat(document.getElementById('p1').value);
@@ -448,6 +501,44 @@ function calcPct2(){
   el.innerHTML=f2(a)+' es el <b>'+f2(r2(a/b*100))+'%</b> de '+f2(b);
 }
 
+// ─── CALC → CONV DIRECT LINK ───
+var calcConvTargets=[
+  {label:'m → ft',from:'m',to:'ft',cat:'length'},
+  {label:'kg → lb',from:'kg',to:'lb',cat:'weight'},
+  {label:'€ → $',from:'EUR',to:'USD',cat:'currency'},
+  {label:'°C → °F',from:'°C',to:'°F',cat:'temp'},
+  {label:'km/h → mph',from:'km/h',to:'mph',cat:'speed'},
+  {label:'L → gal',from:'L',to:'gal',cat:'volume'},
+];
+function renderCalcConvLinks(){
+  var val=parseFloat(cResult);
+  if(isNaN(val)||!cJustEq||!cResult||cResult==='Error'){ document.getElementById('calcConvLinks').innerHTML=''; return; }
+  var html=calcConvTargets.map(function(t){
+    if(t.cat==='currency'&&!rates) return '';
+    var res=convVal(val,t.from,t.to,t.cat);
+    if(res===null) return '';
+    return '<span class="ccv" onclick="setConvVal(\''+t.cat+'\',\''+t.from+'\','+val+')">'+esc(t.label)+' = '+esc(fsConv(res,t.cat))+'</span>';
+  }).join('');
+  document.getElementById('calcConvLinks').innerHTML=html?'<span class="ccv" style="color:var(--t3);cursor:default;border-color:transparent">Convertir:</span>'+html:'';
+}
+function fsConv(val,cat){
+  if(cat==='currency'){
+    if(val>=1e6) return val.toExponential(3);
+    return val.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  if(cat==='temp') return val.toFixed(1)+'°';
+  return val>=1e6?val.toExponential(3):val.toLocaleString('es-ES',{maximumFractionDigits:4});
+}
+function setConvVal(cat,from,val){
+  goTab('conv');
+  setTimeout(function(){
+    setCat(cat);
+    cState.from=from;
+    cState.amt=String(val);
+    renderConvCard();
+  },50);
+}
+
 // ─── CONVERSOR ───
 var CATS=[
   {id:'currency',label:'💱 Divisas'},
@@ -458,6 +549,9 @@ var CATS=[
   {id:'area',label:'📐 Área'},
   {id:'volume',label:'🧴 Volumen'},
   {id:'data',label:'💾 Datos'},
+  {id:'pressure',label:'🔽 Presión'},
+  {id:'energy',label:'⚡ Energía'},
+  {id:'time',label:'⏱ Tiempo'},
   {id:'clothing',label:'👕 Tallas'},
 ];
 var UNITS={
@@ -469,6 +563,9 @@ var UNITS={
   volume:{u:['L','mL','m³','gal','fl oz','cup'],l:['Litro','Mililitro','m³','Galón','Fl oz','Taza'],b:{L:1,mL:.001,'m³':1000,gal:3.78541,'fl oz':0.0295735,cup:0.236588}},
   data:{u:['B','KB','MB','GB','TB'],l:['Byte','Kilobyte','Megabyte','Gigabyte','Terabyte'],b:{B:1,KB:1e3,MB:1e6,GB:1e9,TB:1e12}},
   currency:{u:['EUR','USD','GBP','JPY','CAD','AUD','CHF','CNY','MXN','BRL','BTC','XAU'],l:['Euro €','Dólar $','Libra £','Yen ¥','CAD $','AUD $','Franco CHF','Yuan ¥','Peso MXN','Real R$','Bitcoin ₿','Oro (oz)'],b:null},
+  pressure:{u:['bar','psi','atm','Pa','kPa','mmHg'],l:['Bar','PSI','Atmósfera','Pascal','kPa','mmHg'],b:{bar:1,psi:0.0689476,atm:1.01325,Pa:0.00001,kPa:0.01,mmHg:0.00133322}},
+  energy:{u:['J','kJ','cal','kcal','kWh','Wh'],l:['Joule','Kilojulio','Caloría','Kilocaloría','kWh','Wh'],b:{J:1,kJ:1000,cal:4.184,kcal:4184,kWh:3600000,Wh:3600}},
+  time:{u:['s','min','h','d','sem','mes','año'],l:['Segundo','Minuto','Hora','Día','Semana','Mes (30d)','Año (365d)'],b:{s:1,min:60,h:3600,d:86400,sem:604800,mes:2592000,año:31536000}},
 };
 var cState={cat:'currency',from:'EUR',amt:'1'};
 var rates=ld('kalk_rates',null), ratesTs=ld('kalk_rates_ts',0);
@@ -485,7 +582,9 @@ function renderCats(){
 }
 function setCat(cat){
   cState.cat=cat;
-  cState.from=UNITS[cat]&&UNITS[cat].u?UNITS[cat].u[0]:'EUR';
+  if(cat==='clothing'){ cState.from=''; }
+  else if(UNITS[cat]&&UNITS[cat].u){ cState.from=UNITS[cat].u[0]; }
+  else cState.from='EUR';
   cState.amt='1';
   renderCats(); renderConvCard();
   if(cat==='currency') loadRates();
@@ -510,6 +609,7 @@ async function loadRates(){
 }
 
 function convVal(v,from,to,cat){
+  if(!from||!to) return null;
   if(cat==='temp'){
     var c=from==='°C'?v:from==='°F'?(v-32)*5/9:v-273.15;
     return r2(to==='°C'?c:to==='°F'?c*9/5+32:c+273.15);
@@ -518,7 +618,8 @@ function convVal(v,from,to,cat){
     if(!rates) return null;
     return r2(v/(rates[from]||1)*(rates[to]||1));
   }
-  var b=UNITS[cat].b;
+  var b=UNITS[cat]&&UNITS[cat].b;
+  if(!b||!b[from]||!b[to]) return null;
   return r2(v*b[from]/b[to]);
 }
 
@@ -528,9 +629,26 @@ function renderConvCard(){
   var U=UNITS[cat];
   if(!U){ return; }
   var opts=U.u.map(function(u,i){ return '<option value="'+u+'"'+(u===cState.from?' selected':'')+'>'+u+' — '+U.l[i]+'</option>'; }).join('');
+  document.getElementById('convCard').innerHTML=
+    '<div class="conv-top">'+
+      '<input class="conv-amt" id="cAmt" type="number" value="'+cState.amt+'" oninput="onAmt(this.value)">'+
+      '<select class="conv-sel" id="cFrom" onchange="onFrom(this.value)">'+opts+'</select>'+
+    '</div>'+
+    '<div class="conv-results"></div>';
+  renderConvResults();
+  if(cat==='currency'&&ratesTs){
+    document.getElementById('rateNote').textContent='Tasas: '+new Date(ratesTs).toLocaleString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  }
+}
+function onAmt(v){ cState.amt=v; renderConvResults(); }
+function onFrom(v){ cState.from=v; renderConvCard(); }
+function swapFrom(u){ cState.from=u; renderConvCard(); }
+function renderConvResults(){
+  var cat=cState.cat;
+  var U=UNITS[cat];
+  if(!U) return;
   var amt=parseFloat(cState.amt)||1;
-  var results=U.u.filter(function(u){ return u!==cState.from; }).map(function(u,i){
-    var idx=U.u.indexOf(u);
+  var results=U.u.filter(function(u){ return u!==cState.from; }).map(function(u){
     var val=convVal(amt,cState.from,u,cat);
     if(val===null) return '';
     var fs;
@@ -541,22 +659,12 @@ function renderConvCard(){
     } else {
       fs=val>=1e6?val.toExponential(3):val.toLocaleString('es-ES',{maximumFractionDigits:6});
     }
-    var main=['EUR','USD','GBP','m','kg','°C','km/h','m²','L','GB'].indexOf(u)>=0;
-    return '<div class="conv-row'+(main?' hl':'')+'" onclick="swapFrom(\''+u+'\')"><span class="cr-unit">'+esc(U.l[idx])+' ('+esc(u)+')</span><span class="cr-val'+(main?' hl':'')+'">'+esc(fs)+'</span></div>';
+    var main=['EUR','USD','GBP','m','kg','°C','km/h','m²','L','GB','bar','J','s'].indexOf(u)>=0;
+    return '<div class="conv-row'+(main?' hl':'')+'" onclick="swapFrom(\''+u+'\')"><span class="cr-unit">'+esc(U.l[U.u.indexOf(u)])+' ('+esc(u)+')</span><span class="cr-val'+(main?' hl':'')+'">'+esc(fs)+'</span></div>';
   }).join('');
-  document.getElementById('convCard').innerHTML=
-    '<div class="conv-top">'+
-      '<input class="conv-amt" id="cAmt" type="number" value="'+amt+'" oninput="onAmt(this.value)">'+
-      '<select class="conv-sel" id="cFrom" onchange="onFrom(this.value)">'+opts+'</select>'+
-    '</div>'+
-    '<div class="conv-results">'+results+'</div>';
-  if(cat==='currency'&&ratesTs){
-    document.getElementById('rateNote').textContent='Tasas: '+new Date(ratesTs).toLocaleString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
-  }
+  var el=document.querySelector('.conv-results');
+  if(el) el.innerHTML=results;
 }
-function onAmt(v){ cState.amt=v; renderConvCard(); }
-function onFrom(v){ cState.from=v; renderConvCard(); }
-function swapFrom(u){ cState.from=u; renderConvCard(); }
 
 function renderClothing(){
   var data=[
@@ -579,6 +687,7 @@ var GCATS=['🍽️','🏖️','🏠','🎉','✈️','🎮','🛒','🚗','💊
 var ECATS=['🍽️','🍺','🛒','🚕','🏨','🎬','⛽','💊','🎁','☕'];
 var groups=ld('kalk_groups',[]);
 var curGrp=null, selGCat='🍽️', selECat='🍽️', selPayer=null, selSplit=[];
+var editingExpId=null;
 
 function renderGastos(){
   var el=document.getElementById('gastosScroll');
@@ -681,10 +790,14 @@ function renderGd(g){
         '<div class="ei-body"><div class="ei-desc">'+esc(e.desc)+'</div>'+
         '<div class="ei-meta">Pagó: '+esc(e.payer)+' · Divide: '+esc(sp)+'</div></div>'+
         '<div class="ei-right"><div class="ei-amt">'+fm(e.amount,g.cur)+'</div>'+
-        '<button class="ei-del" data-id="'+e.id+'" onclick="delExp(this.getAttribute(\'data-id\'))">🗑</button></div></div>';
+        '<div style="display:flex;gap:4px">'+
+        '<button class="ei-edit" data-id="'+e.id+'" onclick="editExp(this.getAttribute(\'data-id\'))">✏️</button>'+
+        '<button class="ei-del" data-id="'+e.id+'" onclick="delExp(this.getAttribute(\'data-id\'))">🗑</button></div></div></div>';
     });
   }
-  html+='<div style="margin-top:20px;padding-top:14px;border-top:1px solid #1e2024">'+
+  html+='<div class="export-bar" onclick="exportCSV(\''+g.id+'\')">📄 Exportar CSV</div>'+
+    '<div class="export-bar" onclick="exportPDF(\''+g.id+'\')">📄 Exportar PDF</div>'+
+    '<div style="margin-top:20px;padding-top:14px;border-top:1px solid #1e2024">'+
     '<button class="btn btn-r" style="width:100%" data-gid="'+g.id+'" onclick="delGrp(this.getAttribute(\'data-gid\'))">🗑 Eliminar grupo</button></div>';
   el.innerHTML=html;
 }
@@ -700,6 +813,106 @@ function delGrp(id){
   if(!confirm('¿Eliminar grupo?')) return;
   groups=groups.filter(function(g){ return g.id!==id; });
   sv('kalk_groups',groups); closeGd(); toast('Grupo eliminado');
+}
+
+// ── Edit expense ──
+function editExp(id){
+  var g=groups.find(function(x){ return x.id===curGrp; }); if(!g) return;
+  var e=g.expenses.find(function(x){ return x.id===id; }); if(!e) return;
+  editingExpId=id;
+  document.getElementById('eeDesc').value=e.desc;
+  document.getElementById('eeAmt').value=e.amount;
+  selECat=e.icon;
+  document.getElementById('eeCats').innerHTML=ECATS.map(function(c){
+    return '<div class="cat'+(c===selECat?' on':'')+'" onclick="selEEC(this,\''+c+'\')">'+c+'</div>';
+  }).join('');
+  selPayer=e.payer;
+  document.getElementById('eePayer').innerHTML=g.members.map(function(m){
+    return '<div class="pill pay'+(m===selPayer?' on':'')+'" data-m="'+esc(m)+'" onclick="selEPay(this)">'+esc(m)+'</div>';
+  }).join('');
+  selSplit=e.split.length?e.split.slice():g.members.slice();
+  document.getElementById('eeSplit').innerHTML=g.members.map(function(m){
+    return '<div class="pill'+(selSplit.indexOf(m)>=0?' on':'')+'" data-m="'+esc(m)+'" onclick="togESplit(this)">'+esc(m)+'</div>';
+  }).join('');
+  openOv('ovEditExp');
+}
+function selEEC(el,c){ selECat=c; el.closest('.cats').querySelectorAll('.cat').forEach(function(x){ x.classList.remove('on'); }); el.classList.add('on'); }
+function selEPay(el){ selPayer=el.getAttribute('data-m'); el.closest('.pills').querySelectorAll('.pill').forEach(function(x){ x.classList.remove('on'); }); el.classList.add('on'); }
+function togESplit(el){
+  var m=el.getAttribute('data-m');
+  var i=selSplit.indexOf(m);
+  if(i>=0){ if(selSplit.length>1){ selSplit.splice(i,1); el.classList.remove('on'); } }
+  else{ selSplit.push(m); el.classList.add('on'); }
+}
+function saveEditExp(){
+  var desc=document.getElementById('eeDesc').value.trim();
+  var amt=parseFloat(document.getElementById('eeAmt').value);
+  if(!desc){ toast('Describe el gasto'); return; }
+  if(!amt||amt<=0){ toast('Importe inválido'); return; }
+  var g=groups.find(function(x){ return x.id===curGrp; }); if(!g) return;
+  var e=g.expenses.find(function(x){ return x.id===editingExpId; }); if(!e) return;
+  e.desc=desc; e.amount=r2(amt); e.icon=selECat; e.payer=selPayer;
+  e.split=selSplit.length===g.members.length?[]:selSplit.slice();
+  sv('kalk_groups',groups);
+  document.getElementById('gdTotal').textContent=fm(g.expenses.reduce(function(s,e){ return s+e.amount; },0),g.cur);
+  closeOv('ovEditExp'); renderGd(g); toast('Gasto actualizado');
+}
+
+// ── Export CSV ──
+function exportCSV(id){
+  var g=groups.find(function(x){ return x.id===id; }); if(!g) return;
+  var rows=[['Descripción','Importe','Pagado por','Se divide entre','Fecha'].join(',')];
+  g.expenses.forEach(function(e){
+    var sp=(e.split.length?e.split:g.members).join(' / ');
+    rows.push([esc(e.desc),f2(e.amount),esc(e.payer),esc(sp),new Date(e.createdAt).toLocaleDateString('es-ES')].join(','));
+  });
+  var csv=rows.join('\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=g.name.replace(/\s+/g,'_')+'_gastos.csv';
+  a.click(); toast('CSV descargado');
+}
+
+// ── Export PDF ──
+function exportPDF(id){
+  var g=groups.find(function(x){ return x.id===id; }); if(!g) return;
+  var total=g.expenses.reduce(function(s,e){ return s+e.amount; },0);
+  var tx=calcSettle(g);
+  var html='<html><head><meta charset="utf-8"><style>'+
+    'body{font-family:Helvetica,sans-serif;padding:20px;color:#222}'+
+    'h1{font-size:18px;margin-bottom:4px}'+
+    'h2{font-size:13px;color:#666;margin:4px 0 12px}'+
+    'table{width:100%;border-collapse:collapse;margin-bottom:16px}'+
+    'th{background:#4d9cff;color:#fff;padding:6px 8px;font-size:11px;text-align:left}'+
+    'td{padding:6px 8px;border-bottom:1px solid #ddd;font-size:12px}'+
+    '.total{font-size:16px;font-weight:700;margin:12px 0}'+
+    '.settle{margin:12px 0;padding:10px;background:#f0f9f0;border-radius:6px}'+
+    '.sr{font-size:12px;margin:4px 0}'+
+    '</style></head><body>'+
+    '<h1>'+esc(g.icon)+' '+esc(g.name)+'</h1>'+
+    '<h2>'+g.members.length+' personas · '+g.expenses.length+' gastos · Moneda: '+g.cur+'</h2>';
+  if(g.expenses.length){
+    html+='<table><tr><th>Descripción</th><th>Importe</th><th>Pagó</th><th>Divide</th></tr>';
+    g.expenses.forEach(function(e){
+      var sp=(e.split.length?e.split:g.members).join(', ');
+      html+='<tr><td>'+esc(e.icon)+' '+esc(e.desc)+'</td><td>'+f2(e.amount)+'</td><td>'+esc(e.payer)+'</td><td>'+esc(sp)+'</td></tr>';
+    });
+    html+='</table>';
+  }
+  html+='<div class="total">Total: '+f2(total)+' '+g.cur+'</div>';
+  if(tx.length){
+    html+='<div class="settle"><strong>Cómo liquidar:</strong>';
+    tx.forEach(function(t){ html+='<div class="sr">'+esc(t.from)+' → '+esc(t.to)+' : '+f2(t.amt)+' '+g.cur+'</div>'; });
+    html+='</div>';
+  }
+  html+='</body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8;'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=g.name.replace(/\s+/g,'_')+'_gastos.html';
+  a.click();
+  toast('PDF (HTML) descargado — abre en navegador e imprime a PDF');
 }
 
 // ── New group ──
@@ -763,13 +976,29 @@ function saveExp(){
   closeOv('ovExp'); renderGd(g); toast('Gasto añadido — '+fm(amt,g.cur));
 }
 
+// ── Keyboard shortcuts ──
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') document.querySelectorAll('.ov.on').forEach(function(o){ o.classList.remove('on'); });
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT') return;
+  if(curTab!=='calc'||cMode==='pct') return;
+  if(e.key==='ArrowUp'){ e.preventDefault(); histUp(); }
+  if(e.key==='ArrowDown'){ e.preventDefault(); histDown(); }
+  if(e.key>='0'&&e.key<='9') num(e.key);
+  if(e.key==='.') dot();
+  if(e.key==='+'||e.key==='-') op(e.key==='-'?'−':e.key);
+  if(e.key==='*') op('×');
+  if(e.key==='/') op('÷');
+  if(e.key==='Enter'||e.key==='=') eq();
+  if(e.key==='Backspace') del();
+  if(e.key==='Escape') cc();
+});
+
 // ── Overlays ──
 function openOv(id){ document.getElementById(id).classList.add('on'); }
 function closeOv(id){ document.getElementById(id).classList.remove('on'); }
 document.querySelectorAll('.ov').forEach(function(el){
   el.addEventListener('click', function(e){ if(e.target===el) el.classList.remove('on'); });
 });
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') document.querySelectorAll('.ov.on').forEach(function(o){ o.classList.remove('on'); }); });
 </script>
 </body>
 </html>
